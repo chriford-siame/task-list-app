@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:task_list/constants/colors.dart';
+import 'package:task_list/models/tasklist.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final TaskList task_list;
+  Home({Key? key, required this.task_list}) : super(key: key);
+  final taskList = TaskList.taskList();
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,12 @@ class Home extends StatelessWidget {
             // margin: EdgeInsets.all(20),
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
             child: Column(
-              
               children: [
                 // A search bar: input field
                 searchBox(),
                 // A tasklist section
                 headerTitle(),
-                taskList(),
+                _taskList(),
               ],
             )));
   }
@@ -37,7 +39,7 @@ class Home extends StatelessWidget {
           color: tdBlack,
           size: 30,
         ),
-        // ignore: sized_box_for_whitespace 
+        // ignore: sized_box_for_whitespace
         Container(
           height: 40,
           width: 40,
@@ -96,7 +98,7 @@ class Home extends StatelessWidget {
         ));
   }
 
-  Widget taskList() {
+  Widget _taskList() {
     return Expanded(
       child: ListView(
         children: [
@@ -127,9 +129,9 @@ class Home extends StatelessWidget {
   Widget taskListItem() {
     return Container(
       margin: const EdgeInsets.only(
-          top: 5,
-          bottom: 5,
-        ),
+        top: 5,
+        bottom: 5,
+      ),
       child: ListTile(
         onTap: () {
           print("Hello world!");
