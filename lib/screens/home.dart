@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -12,11 +15,14 @@ class Home extends StatelessWidget {
         appBar: appBar(),
         body: Container(
             // margin: EdgeInsets.all(20),
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
             child: Column(
+              
               children: [
                 // A search bar: input field
                 searchBox(),
+                // A tasklist section
+                headerTitle(),
                 taskList(),
               ],
             )));
@@ -24,28 +30,29 @@ class Home extends StatelessWidget {
 
   appBar() {
     return AppBar(
-          backgroundColor: tdBGColor,
-          title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            const Icon(
-              Icons.menu,
-              color: tdBlack,
-              size: 30,
-            ),
-            // ignore: sized_box_for_whitespace
-            Container(
-              height: 40,
-              width: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset('assets/images/avatar-2.jpg'),
-              ),
-            ),
-          ]),
-        );
+      backgroundColor: tdBGColor,
+      title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        const Icon(
+          Icons.menu,
+          color: tdBlack,
+          size: 30,
+        ),
+        // ignore: sized_box_for_whitespace 
+        Container(
+          height: 40,
+          width: 40,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset('assets/images/avatar-2.jpg'),
+          ),
+        ),
+      ]),
+    );
   }
 
   Widget searchBox() {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -68,46 +75,98 @@ class Home extends StatelessWidget {
       ),
     );
   }
+
+  Widget headerTitle() {
+    return Container(
+        margin: const EdgeInsets.only(
+          top: 5,
+          bottom: 20,
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'My Task List',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ));
+  }
+
   Widget taskList() {
     return Expanded(
       child: ListView(
         children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: 50,
-              bottom: 20,
-            ),
-            child: const Text(
-              'Task List',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w500
-              ),
-            ),
-          ),
           taskListItem(),
-
-
-
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
+          taskListItem(),
         ],
       ),
     );
   }
+
   Widget taskListItem() {
     return Container(
-      child: ListTile(
-        // onTap: () {},
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20)
+      margin: const EdgeInsets.only(
+          top: 5,
+          bottom: 5,
         ),
+      child: ListTile(
+        onTap: () {
+          print("Hello world!");
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         tileColor: Colors.white,
-        leading: Icon(Icons.check_box, color: tdBlue,),
-        title: Text("text"),
+        leading: Icon(
+          Icons.check_box,
+          color: tdBlue,
+        ),
+        title: const Text(
+          "Go to the gym",
+          style: TextStyle(
+            color: tdBlack,
+            decoration: TextDecoration.lineThrough,
+            fontSize: 16,
+          ),
+        ),
+        trailing: Container(
+          padding: EdgeInsets.all(0),
+          margin: EdgeInsets.symmetric(vertical: 12),
+          width: 35,
+          height: 35,
+          decoration: BoxDecoration(
+            color: tdRed,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: IconButton(
+            color: Colors.white,
+            iconSize: 18,
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              print("Item deleted successfully");
+            },
+          ),
+        ),
       ),
     );
   }
-
-
-
-
 }
